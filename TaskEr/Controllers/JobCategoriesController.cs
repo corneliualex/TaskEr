@@ -28,14 +28,14 @@ namespace TaskEr.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View("CreateForm",new JobCategory());
         }
 
         public ActionResult Read(int id)
         {
             var jobCategory = _context.JobCategories.SingleOrDefault(j => j.Id == id);
 
-            if (jobCategory==null)
+            if (jobCategory == null)
                 return HttpNotFound();
             return View(jobCategory);
         }
@@ -52,7 +52,13 @@ namespace TaskEr.Controllers
         #endregion
 
         #region PostRequests
-
+        [HttpPost]
+        public ActionResult CreateForm(JobCategory jobCategory)
+        {
+            _context.JobCategories.Add(jobCategory);
+            _context.SaveChanges();
+            return RedirectToAction("Index","JobCategories");
+        }
         #endregion
     }
 

@@ -259,7 +259,7 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\JobCategories\Index.cshtml" />
-    <Content Include="Views\JobCategories\Create.cshtml" />
+    <Content Include="Views\JobCategories\CreateForm.cshtml" />
     <Content Include="Views\JobCategories\Read.cshtml" />
   </ItemGroup>
   <ItemGroup>

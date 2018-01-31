@@ -1,11 +1,53 @@
-﻿
+﻿@model IEnumerable<TaskEr.Models.JobCategory>
 @{
     ViewBag.Title = "Index";
+    var index = 1;
 }
 <br />
 @if (!ViewData.ModelState.IsValid)
 {
     @Html.ValidationSummary()
-    <a href="@Url.Action("Create")">Add a job category</a>
+<a href="@Url.Action("Create")">Add a job category</a>
 }
+else
+{
+<a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">Create a new category !</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Category name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Date added</th>
+            <th scope="col">Added By</th>
+            <th scope="col">Modified By</th>
+            <th scope="col">Date modified</th>
+            <th scope="col" class="table-light">Edit</th>
+            <th scope="col" class="table-dark">Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <th scope="row">@(index++)</th>
+            <td>@item.Name</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td>Column content</td>
+            <td class="table-light">Edit</td>
+            <td class="table-dark">Delete</td>
+        </tr>
+        }
+
+    </tbody>
+
+</table>
+
+}
+
+
 
