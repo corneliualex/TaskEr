@@ -1,0 +1,40 @@
+﻿@model TaskEr.Models.JobCategory
+@{
+    ViewBag.Title = "Read";
+}
+
+<h4>
+    @Model.Name
+    <span class="badge badge-primary badge-pill">edit</span>
+</h4>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Category name :</b></text>
+        @Model.Name
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Description :</b></text>
+        Dapibus ac facilisis in
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Added by :</b></text>
+        Dapibus ac facilisis in
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Date added :</b></text>
+        Dapibus ac facilisis in
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Date modified :</b></text>
+        Dapibus ac facilisis in
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Modified by :</b></text>
+        Dapibus ac facilisis in
+    </li>
+</ul>
+<button type="button" class="btn btn-primary btn-lg btn-block">See statistics</button>

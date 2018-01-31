@@ -44,6 +44,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -115,12 +123,6 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
     </Reference>
@@ -182,6 +184,14 @@
     <Compile Include="Migrations\201801311129156_Added_Jobs_and_JobCategories_Models.cs" />
     <Compile Include="Migrations\201801311129156_Added_Jobs_and_JobCategories_Models.Designer.cs">
       <DependentUpon>201801311129156_Added_Jobs_and_JobCategories_Models.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801311451210_Seed_JobCategories.cs" />
+    <Compile Include="Migrations\201801311451210_Seed_JobCategories.Designer.cs">
+      <DependentUpon>201801311451210_Seed_JobCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201801311650294_Seed_Users.cs" />
+    <Compile Include="Migrations\201801311650294_Seed_Users.Designer.cs">
+      <DependentUpon>201801311650294_Seed_Users.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -250,6 +260,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\JobCategories\Index.cshtml" />
     <Content Include="Views\JobCategories\Create.cshtml" />
+    <Content Include="Views\JobCategories\Read.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -269,6 +280,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801311129156_Added_Jobs_and_JobCategories_Models.resx">
       <DependentUpon>201801311129156_Added_Jobs_and_JobCategories_Models.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801311451210_Seed_JobCategories.resx">
+      <DependentUpon>201801311451210_Seed_JobCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201801311650294_Seed_Users.resx">
+      <DependentUpon>201801311650294_Seed_Users.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
