@@ -1,0 +1,11 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<br />
+@if (!ViewData.ModelState.IsValid)
+{
+    @Html.ValidationSummary()
+    <a href="@Url.Action("Create")">Add a job category</a>
+}
+
