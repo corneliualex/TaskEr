@@ -12,10 +12,12 @@ namespace TaskEr.Models
         public string Description { get; set; }
 
         //
-        //Foreign key
+        //Foreign keys
         public int JobCategoryId { get; set; }
+        public string ApplicationUserId { get; set; }
         //
-        //navigation property
+        //navigation properties
         public JobCategory JobCategory { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }

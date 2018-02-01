@@ -72,7 +72,7 @@ namespace TaskEr.Controllers
         #region PostRequests
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateForm(JobCategory jobCategory)
+        public ActionResult Create(JobCategory jobCategory)
         {
             jobCategory.AddedBy = User.Identity.GetUserName();
             jobCategory.DateAdded = DateTime.Now;
@@ -83,7 +83,7 @@ namespace TaskEr.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult UpdateForm(JobCategory jobCategory)
+        public ActionResult Update(JobCategory jobCategory)
         {
             var jobInDb = _context.JobCategories.Single(j => j.Id == jobCategory.Id);
             jobInDb.Name = jobCategory.Name;

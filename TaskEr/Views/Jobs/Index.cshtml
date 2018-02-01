@@ -1,0 +1,42 @@
+﻿@model IEnumerable<TaskEr.Models.Job>
+@{
+    ViewBag.Title = "Index";
+    var index = 1;
+}
+
+<h3>
+    My jobs
+    <br />
+    <small class="text-muted">@DateTime.Now.ToShortDateString()</small>
+</h3>
+
+<a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">What have you done today ?</a>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Time Started</th>
+            <th scope="col">Time Ended</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col" class="table-light">Edit</th>
+            <th scope="col" class="table-dark">Delete</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>Should it be here ?</td>
+                <td>Should it be here ?</td>
+                <td>Should it be here ?</td>
+                <td>@item.Description</td>
+                <td>@item.JobCategory.Name</td>
+                <td class="table-light">Edit</td>
+                <td class="table-dark">Delete</td>
+            </tr>
+        }
+        
+    </tbody>
+</table>

@@ -10,7 +10,7 @@
                 <a class="nav-link" href="@Url.Action("Index","JobCategories")">Job Categories</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Index","JobCategories")">My Jobs</a>
+                <a class="nav-link" href="@Url.Action("Index","Jobs")">My Jobs</a>
             </li>
             <li class="nav-item">
                 @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage", @class = "nav-link" })

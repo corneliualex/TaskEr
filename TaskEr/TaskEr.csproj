@@ -170,6 +170,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminDashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JobCategoriesController.cs" />
     <Compile Include="Controllers\JobsController.cs" />
@@ -201,6 +202,10 @@
     <Compile Include="Migrations\201802011222067_Update_JobCategoryModel_1.Designer.cs">
       <DependentUpon>201802011222067_Update_JobCategoryModel_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802011605596_Updated_JobModel_1.cs" />
+    <Compile Include="Migrations\201802011605596_Updated_JobModel_1.Designer.cs">
+      <DependentUpon>201802011605596_Updated_JobModel_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -209,6 +214,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\JobByCategoriesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-yeti.css" />
@@ -270,10 +276,12 @@
     <Content Include="Views\JobCategories\CreateForm.cshtml" />
     <Content Include="Views\JobCategories\Read.cshtml" />
     <Content Include="Views\JobCategories\UpdateForm.cshtml" />
+    <Content Include="Views\Jobs\Index.cshtml" />
+    <Content Include="Views\Jobs\CreateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Jobs\" />
+    <Folder Include="Views\AdminDashboard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -301,6 +309,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802011222067_Update_JobCategoryModel_1.resx">
       <DependentUpon>201802011222067_Update_JobCategoryModel_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011605596_Updated_JobModel_1.resx">
+      <DependentUpon>201802011605596_Updated_JobModel_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
