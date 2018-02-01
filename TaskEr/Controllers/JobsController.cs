@@ -11,6 +11,7 @@ using TaskEr.ViewModels;
 
 namespace TaskEr.Controllers
 {
+    [Authorize]
     public class JobsController : Controller
     {
         ApplicationDbContext _context = new ApplicationDbContext();
@@ -31,12 +32,19 @@ namespace TaskEr.Controllers
                 JobCategories = _context.JobCategories.ToList()
 
             };
-            return View("CreateForm",viewModel);
+            return View("CreateForm", viewModel);
         }
 
-        public ActionResult Read()
+        public ActionResult Read(int? id)
         {
-            return View();
+            if (id == null)
+                return RedirectToAction("Index", "JobsController");
+
+            var job = _context.Jobs.Include(jobCat => jobCat.JobCategory).SingleOrDefault(j => j.Id == id);
+            if (job == null)
+                return HttpNotFound();
+
+            return View(job);
         }
 
         public ActionResult Update()
@@ -72,7 +80,7 @@ namespace TaskEr.Controllers
         }
 
         [HttpPost]
-        public ActionResult UpdateForm(Job job)
+        public ActionResult Update(Job job)
         {
             return View();
         }

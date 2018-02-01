@@ -19,6 +19,7 @@
             <th scope="col">Time Ended</th>
             <th scope="col">Description</th>
             <th scope="col">Category</th>
+            <th scope="col" class="table-light">Details</th>
             <th scope="col" class="table-light">Edit</th>
             <th scope="col" class="table-dark">Delete</th>
 
@@ -33,10 +34,11 @@
                 <td>Should it be here ?</td>
                 <td>@item.Description</td>
                 <td>@item.JobCategory.Name</td>
+                <td class="table-light"><a href="@Url.Action("Read", "Jobs", routeValues: new { id = item.Id })">Details</a></td>
                 <td class="table-light">Edit</td>
                 <td class="table-dark">Delete</td>
             </tr>
         }
-        
+
     </tbody>
 </table>
