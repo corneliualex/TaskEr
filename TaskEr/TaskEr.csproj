@@ -193,6 +193,14 @@
     <Compile Include="Migrations\201801311650294_Seed_Users.Designer.cs">
       <DependentUpon>201801311650294_Seed_Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802011126552_Update_JobCategoryModel.cs" />
+    <Compile Include="Migrations\201802011126552_Update_JobCategoryModel.Designer.cs">
+      <DependentUpon>201802011126552_Update_JobCategoryModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802011222067_Update_JobCategoryModel_1.cs" />
+    <Compile Include="Migrations\201802011222067_Update_JobCategoryModel_1.Designer.cs">
+      <DependentUpon>201802011222067_Update_JobCategoryModel_1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -261,6 +269,7 @@
     <Content Include="Views\JobCategories\Index.cshtml" />
     <Content Include="Views\JobCategories\CreateForm.cshtml" />
     <Content Include="Views\JobCategories\Read.cshtml" />
+    <Content Include="Views\JobCategories\UpdateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -286,6 +295,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201801311650294_Seed_Users.resx">
       <DependentUpon>201801311650294_Seed_Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011126552_Update_JobCategoryModel.resx">
+      <DependentUpon>201802011126552_Update_JobCategoryModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802011222067_Update_JobCategoryModel_1.resx">
+      <DependentUpon>201802011222067_Update_JobCategoryModel_1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

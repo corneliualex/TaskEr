@@ -1,18 +1,20 @@
 ﻿@model TaskEr.Models.JobCategory
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "UpdateForm";
 }
 
-<h2>Create</h2>
+<h2>UpdateForm</h2>
 
-@using (Html.BeginForm("CreateForm", "JobCategories", FormMethod.Post))
+@using (Html.BeginForm("UpdateForm", "JobCategories", FormMethod.Post))
 {
     <fieldset>
 
         <div class="form-group">
             @Html.LabelFor(j => j.Name)
-            @Html.TextBoxFor(j => j.Name,htmlAttributes: new { @class = "form-control" })
+            @Html.TextBoxFor(j => j.Name, htmlAttributes: new { @class = "form-control" })
             @Html.ValidationMessageFor(j => j.Name)
+
+
         </div>
         <div class="form-group">
             @Html.LabelFor(j => j.Description)
@@ -25,7 +27,7 @@
                 <input class="form-control" id="@Model.Name">
             </div>
         -->
-        
+
         <div class="form-group">
             <label for="exampleSelect1">Example select</label>
             <select class="form-control" id="exampleSelect1">
@@ -41,7 +43,6 @@
         <button type="submit" class="btn btn-primary">Submit</button>
     </fieldset>
 }
-
 
 @section scripts{
     @Scripts.Render("~/bundles/jqueryval")

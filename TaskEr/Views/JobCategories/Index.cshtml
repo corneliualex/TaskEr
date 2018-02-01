@@ -3,51 +3,91 @@
     ViewBag.Title = "Index";
     var index = 1;
 }
-<br />
-@if (!ViewData.ModelState.IsValid)
+
+@if (ViewData.ModelState.IsValid)
 {
-    @Html.ValidationSummary()
-<a href="@Url.Action("Create")">Add a job category</a>
-}
-else
-{
-<a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">Create a new category !</a>
-<table class="table table-hover">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Category name</th>
-            <th scope="col">Description</th>
-            <th scope="col">Date added</th>
-            <th scope="col">Added By</th>
-            <th scope="col">Modified By</th>
-            <th scope="col">Date modified</th>
-            <th scope="col" class="table-light">Edit</th>
-            <th scope="col" class="table-dark">Delete</th>
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">Create a new category !</a>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Category name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Date added</th>
+                <th scope="col">Added By</th>
+                <th scope="col">Modified By</th>
+                <th scope="col">Date modified</th>
+                <th scope="col" class="table-light">Edit</th>
+                <th scope="col" class="table-dark">Delete</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr>
-            <th scope="row">@(index++)</th>
-            <td>@item.Name</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td>Column content</td>
-            <td class="table-light">Edit</td>
-            <td class="table-dark">Delete</td>
-        </tr>
-        }
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@(index++)</th>
+                    <td><a href="@Url.Action("Read", routeValues: new { @id = item.Id })">@item.Name</a></td>
+                    <td>@item.Description</td>
+                    @{
+                        string dateAdded;
+                        dateAdded = item.DateAdded.HasValue == true ? item.DateAdded.Value.ToShortDateString() : "-";
+                        <td>@dateAdded</td>
+                    }
+                    <td>@item.AddedBy</td>
+                    <td>@item.ModifiedBy</td>
+                    @{
+                        string dateModified;
+                        dateModified = item.DateModified.HasValue == true ? item.DateModified.Value.ToShortDateString() : "-";
+                        <td>@dateModified</td>
+                    }
+                    <td class="table-light"><a href="@Url.Action("Update", routeValues: new { @id = item.Id })">Update</a></td>
+                    <td class="table-dark">
+                        @Html.ActionLink(
+                                                     "Delete",
+                                                     "Delete",
+                                                     routeValues: new
+                                                     {
+                                                         id = item.Id
+                                                     },
+                                                     htmlAttributes: new
+                                                     {
+                                                         onclick = "return confirm('Are sure wants to delete?');"
+                                                     })
+                    </td>
+                </tr>
+                        }
+        </tbody>
+    </table>
+    <div>
+        <ul class="pagination pagination-sm">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
+                        }
+                        else
+                        {
 
-    </tbody>
-
-</table>
-
-}
-
-
-
+                            @Html.ValidationSummary()
+                            < a href = "@Url.Action("Create")" > Add a job category </ a >
+                        }
