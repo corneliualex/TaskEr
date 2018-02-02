@@ -14,7 +14,7 @@ namespace TaskEr.Controllers
     [Authorize]
     public class JobsController : Controller
     {
-        ApplicationDbContext _context = new ApplicationDbContext();
+        private ApplicationDbContext _context = new ApplicationDbContext();
 
         #region GetRequests
 
@@ -47,14 +47,35 @@ namespace TaskEr.Controllers
             return View(job);
         }
 
-        public ActionResult Update()
+        public ActionResult Update(int? id)
         {
-            return View();
+            if (id == null)
+                return RedirectToAction("Index", "Jobs");
+
+            var job = _context.Jobs.SingleOrDefault(j => j.Id == id);
+            if (job == null)
+                return HttpNotFound();
+
+            var viewModel = new JobByCategoriesViewModel
+            {
+                Job = job,
+                JobCategories = _context.JobCategories.ToList()
+            };
+            return View("UpdateForm", viewModel);
         }
 
-        public ActionResult Delete()
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+                return RedirectToAction("Index", "Jobs");
+
+            var job = _context.Jobs.SingleOrDefault(j => j.Id == id);
+            if (job == null)
+                return HttpNotFound();
+
+            _context.Jobs.Remove(job);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Jobs");
         }
         #endregion
 
@@ -82,7 +103,23 @@ namespace TaskEr.Controllers
         [HttpPost]
         public ActionResult Update(Job job)
         {
-            return View();
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new JobByCategoriesViewModel
+                {
+                    Job = job,
+                    JobCategories = _context.JobCategories.ToList()
+                };
+                return View("UpdateForm", viewModel);
+            }
+
+            var jobInDb = _context.Jobs.Single(j => j.Id == job.Id);
+            jobInDb.Description = job.Description;
+            jobInDb.JobCategoryId = job.JobCategoryId;
+            jobInDb.ApplicationUserId = job.ApplicationUserId;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index","Jobs");
         }
         #endregion
     }

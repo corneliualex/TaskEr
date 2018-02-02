@@ -3,10 +3,38 @@
     ViewBag.Title = "Index";
     var index = 1;
 }
-
+<h3>
+    Job categories
+    <br />
+    <small class="text-muted">today : @DateTime.Now.ToShortDateString()</small>
+</h3>
 @if (ViewData.ModelState.IsValid)
 {
-    <a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">Create a new category !</a>
+    <div>
+        <ul class="pagination pagination-sm">
+            <li class="page-item disabled">
+                <a class="page-link" href="#">&laquo;</a>
+            </li>
+            <li class="page-item active">
+                <a class="page-link" href="#">1</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">2</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">3</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">4</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">5</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">&raquo;</a>
+            </li>
+        </ul>
+    </div>
     <table class="table table-hover">
         <thead>
             <tr>
@@ -57,37 +85,14 @@
                     </td>
                 </tr>
                         }
+
         </tbody>
     </table>
-    <div>
-        <ul class="pagination pagination-sm">
-            <li class="page-item disabled">
-                <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-                <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">4</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">5</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">&raquo;</a>
-            </li>
-        </ul>
-    </div>
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">Create a new category !</a>
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="#">See statistics</a>
                         }
                         else
                         {
-
                             @Html.ValidationSummary()
-                            < a href = "@Url.Action("Create")" > Add a job category </ a >
+                        < a href = "@Url.Action("Create")" > Add a job category </ a >
                         }

@@ -1,0 +1,24 @@
+﻿@model TaskEr.ViewModels.JobByCategoriesViewModel
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update</h2>
+
+@using (Html.BeginForm("Update","Jobs",FormMethod.Post))
+{
+    <fieldset>
+        <div class="form-group">
+            @Html.LabelFor(j => j.Job.Description)
+            @Html.TextBoxFor(j => j.Job.Description, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.DropDownListFor(j => j.Job.JobCategoryId,new SelectList(Model.JobCategories,"Id","Name"),"Select category",htmlAttributes : new { @class = "form-control" })
+        </div>
+
+        @Html.HiddenFor(j => j.Job.Id)
+        @Html.HiddenFor(j => j.Job.ApplicationUserId)
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </fieldset>
+}

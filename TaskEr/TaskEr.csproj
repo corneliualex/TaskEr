@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201802011605596_Updated_JobModel_1.Designer.cs">
       <DependentUpon>201802011605596_Updated_JobModel_1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802021123238_ChangesWhere.cs" />
+    <Compile Include="Migrations\201802021123238_ChangesWhere.Designer.cs">
+      <DependentUpon>201802021123238_ChangesWhere.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -279,6 +283,7 @@
     <Content Include="Views\Jobs\Index.cshtml" />
     <Content Include="Views\Jobs\CreateForm.cshtml" />
     <Content Include="Views\Jobs\Read.cshtml" />
+    <Content Include="Views\Jobs\UpdateForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -313,6 +318,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802011605596_Updated_JobModel_1.resx">
       <DependentUpon>201802011605596_Updated_JobModel_1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802021123238_ChangesWhere.resx">
+      <DependentUpon>201802021123238_ChangesWhere.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
