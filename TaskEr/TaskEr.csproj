@@ -60,6 +60,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -210,6 +212,18 @@
     <Compile Include="Migrations\201802021123238_ChangesWhere.Designer.cs">
       <DependentUpon>201802021123238_ChangesWhere.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201802071000320_Update_JobModel_2.cs" />
+    <Compile Include="Migrations\201802071000320_Update_JobModel_2.Designer.cs">
+      <DependentUpon>201802071000320_Update_JobModel_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802071029299_Update_JobModel_3.cs" />
+    <Compile Include="Migrations\201802071029299_Update_JobModel_3.Designer.cs">
+      <DependentUpon>201802071029299_Update_JobModel_3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201802071055022_Update_JobModel_%24.cs" />
+    <Compile Include="Migrations\201802071055022_Update_JobModel_%24.Designer.cs">
+      <DependentUpon>201802071055022_Update_JobModel_%24.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -284,6 +298,7 @@
     <Content Include="Views\Jobs\CreateForm.cshtml" />
     <Content Include="Views\Jobs\Read.cshtml" />
     <Content Include="Views\Jobs\UpdateForm.cshtml" />
+    <Content Include="Views\Shared\_Breadcrumb.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -321,6 +336,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201802021123238_ChangesWhere.resx">
       <DependentUpon>201802021123238_ChangesWhere.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071000320_Update_JobModel_2.resx">
+      <DependentUpon>201802071000320_Update_JobModel_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071029299_Update_JobModel_3.resx">
+      <DependentUpon>201802071029299_Update_JobModel_3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201802071055022_Update_JobModel_%24.resx">
+      <DependentUpon>201802071055022_Update_JobModel_%24.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

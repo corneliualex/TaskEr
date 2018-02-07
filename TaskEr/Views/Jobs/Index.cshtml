@@ -1,14 +1,13 @@
 ﻿@model IEnumerable<TaskEr.Models.Job>
 @{
     ViewBag.Title = "Index";
-    var index = 1;
+    var index = 0;
+    var hoursWorkedToday= Model.Where(j => j.AddedDateTime.ToShortDateString().Equals(DateTime.Now.ToShortDateString())).Sum(j => j.TimeSpent.HasValue == true ? j.TimeSpent.Value.TotalHours : 0.0d);
+    
 }
 
-<h3>
-    My jobs
-    <br />
-    <small class="text-muted">today : @DateTime.Now.ToShortDateString()</small>
-</h3>
+<h4><small class="text-muted">Today - @DateTime.Now.ToShortDateString() you have worked <b>@hoursWorkedToday</b> hours</small></h4>
+
 
 <div>
     <ul class="pagination pagination-sm">
@@ -44,7 +43,7 @@
             <th scope="col">Description</th>
             <th scope="col">Category</th>
             <th scope="col" class="table-light">Details</th>
-            <th scope="col" class="table-light">Edit</th>
+            <th scope="col" class="table-light">Update</th>
             <th scope="col" class="table-dark">Delete</th>
 
         </tr>
@@ -53,16 +52,16 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>Should it be here ?</td>
-                <td>Should it be here ?</td>
-                <td>Should it be here ?</td>
+                <td>@(index++)</td>
+                <td>@item.TimeStarted.ToString()</td>
+                <td>@{  var timeEnded = item.TimeEnded.HasValue == true ? item.TimeEnded.Value.ToString() : "-";}@timeEnded</td>
                 <td>@item.Description</td>
                 <td>@item.JobCategory.Name</td>
                 <td class="table-light"><a href="@Url.Action("Read", "Jobs", routeValues: new { id = item.Id })">Details</a></td>
                 <td class="table-light"><a href="@Url.Action("Update", "Jobs", routeValues: new { id = item.Id })">Update</a></td>
                 <td class="table-dark"><a href="@Url.Action("Delete", "Jobs", routeValues: new { id = item.Id })" onclick="return confirm('Are sure wants to delete?');">Delete</a></td>
             </tr>
-        }
+                    }
 
     </tbody>
 </table>

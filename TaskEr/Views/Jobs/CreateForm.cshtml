@@ -13,11 +13,21 @@
             @Html.LabelFor(j => j.Job.Description)
             @Html.TextBoxFor(j => j.Job.Description, htmlAttributes: new { @class = "form-control" })
         </div>
+        <div class="form-group">
+            @Html.LabelFor(j => j.Job.TimeStarted)
+            @Html.TextBoxFor(j => j.Job.TimeStarted, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(j => j.Job.TimeEnded)
+            @Html.TextBoxFor(j => j.Job.TimeEnded, htmlAttributes: new { @class = "form-control" })
+        </div>
      
         <div class="form-group">
             @Html.DropDownListFor(j => j.Job.JobCategoryId,new SelectList(Model.JobCategories,"Id","Name"),"Select category",htmlAttributes: new { @class="form-control"})
         </div>    
 
+        @Html.HiddenFor(j => j.Job.ApplicationUserId)
+        @Html.HiddenFor(j => j.Job.TimeSpent)
         <button type="submit" class="btn btn-primary">Submit</button>
     </fieldset>
 

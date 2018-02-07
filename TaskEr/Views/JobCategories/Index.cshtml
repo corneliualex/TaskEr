@@ -45,7 +45,8 @@
                 <th scope="col">Added By</th>
                 <th scope="col">Modified By</th>
                 <th scope="col">Date modified</th>
-                <th scope="col" class="table-light">Edit</th>
+                <th scope="col" class="table-light">Details</th>
+                <th scope="col" class="table-light">Update</th>
                 <th scope="col" class="table-dark">Delete</th>
 
             </tr>
@@ -55,21 +56,14 @@
             {
                 <tr>
                     <th scope="row">@(index++)</th>
-                    <td><a href="@Url.Action("Read", routeValues: new { @id = item.Id })">@item.Name</a></td>
+                    <td><b>@item.Name</b></td>
                     <td>@item.Description</td>
-                    @{
-                        string dateAdded;
-                        dateAdded = item.DateAdded.HasValue == true ? item.DateAdded.Value.ToShortDateString() : "-";
-                        <td>@dateAdded</td>
-                    }
+                    <td>@{var dateAdded = item.DateAdded.HasValue == true ? item.DateAdded.Value.ToShortDateString() : "-";}@dateAdded</td>
                     <td>@item.AddedBy</td>
                     <td>@item.ModifiedBy</td>
-                    @{
-                        string dateModified;
-                        dateModified = item.DateModified.HasValue == true ? item.DateModified.Value.ToShortDateString() : "-";
-                        <td>@dateModified</td>
-                    }
-                    <td class="table-light"><a href="@Url.Action("Update", routeValues: new { @id = item.Id })">Update</a></td>
+                    <td>@{var dateModified = item.DateModified.HasValue == true ? item.DateModified.Value.ToShortDateString() : "-";}@dateModified</td>
+                    <td class="table-light"><a href="@Url.Action("Read", routeValues: new { id = item.Id })">Details</a></td>
+                    <td class="table-light"><a href="@Url.Action("Update", routeValues: new { id = item.Id })">Update</a></td>
                     <td class="table-dark">
                         @Html.ActionLink(
                                                      "Delete",

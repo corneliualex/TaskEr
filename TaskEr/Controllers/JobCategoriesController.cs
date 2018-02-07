@@ -12,6 +12,7 @@ namespace TaskEr.Controllers
     public class JobCategoriesController : Controller
     {
         ApplicationDbContext _context = new ApplicationDbContext();
+
         //[Authorize(Roles = "Administrator,Developer,Moderator,Worker")]
         #region GetRequests
 

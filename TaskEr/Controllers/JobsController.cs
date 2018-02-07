@@ -17,10 +17,11 @@ namespace TaskEr.Controllers
         private ApplicationDbContext _context = new ApplicationDbContext();
 
         #region GetRequests
-
         public ActionResult Index()
         {
-            var myJobs = _context.Jobs.Include(user => user.ApplicationUser).Include(jobCat => jobCat.JobCategory).ToList();
+            var today = DateTime.Now.ToShortDateString();
+            var myJobs = _context.Jobs.Include(user => user.ApplicationUser).Include(jobCat => jobCat.JobCategory).ToList().Where(j => today.Equals(SetDate(j.AddedDateTime)));
+           
             return View(myJobs);
         }
 
@@ -94,7 +95,7 @@ namespace TaskEr.Controllers
                 return View("CreateForm", viewModel);
             }
 
-            job.ApplicationUserId = User.Identity.GetUserId();
+            job.AddedDateTime = DateTime.Now;
             _context.Jobs.Add(job);
             _context.SaveChanges();
             return RedirectToAction("Index", "Jobs");
@@ -117,9 +118,19 @@ namespace TaskEr.Controllers
             jobInDb.Description = job.Description;
             jobInDb.JobCategoryId = job.JobCategoryId;
             jobInDb.ApplicationUserId = job.ApplicationUserId;
+            jobInDb.TimeStarted = job.TimeStarted;
+            jobInDb.TimeEnded = job.TimeEnded;
+            jobInDb.TimeSpent = job.TimeSpent;
 
             _context.SaveChanges();
-            return RedirectToAction("Index","Jobs");
+            return RedirectToAction("Index", "Jobs");
+        }
+        #endregion
+
+        #region Helpers
+        private string SetDate(DateTime date)
+        {
+            return date.ToShortDateString();
         }
         #endregion
     }
