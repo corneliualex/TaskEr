@@ -1,0 +1,48 @@
+﻿@model TaskEr.Models.JobCategory
+@{
+    ViewBag.Title = "Read";
+}
+
+<h4>
+    @Model.Name
+    <a href="@Url.Action("Update", routeValues: new { @id = Model.Id })"><span class="badge badge-primary badge-pill">Update</span></a>
+</h4>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Category name :</b></text>
+        @Model.Name
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Description :</b></text>
+        @Model.Description
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Added by :</b></text>
+        @Model.AddedBy
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Date added :</b></text>
+        @{
+            string dateAdded;
+            dateAdded = Model.DateAdded.HasValue == true ? Model.DateAdded.Value.ToShortDateString() : "-";
+        }
+        @dateAdded
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Date modified :</b></text>
+        @{
+            string dateModified;
+            dateModified = Model.DateModified.HasValue == true ? Model.DateModified.Value.ToShortDateString() : "-";
+        }
+        @dateModified
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Modified by :</b></text>
+        @Model.ModifiedBy
+    </li>
+</ul>
+<button type="button" class="btn btn-primary btn-lg btn-block">See statistics</button>

@@ -1,0 +1,36 @@
+﻿@model TaskEr.Models.Job
+@{
+    ViewBag.Title = "Read";
+
+    var totalTime = Model.TimeEnded.HasValue == true ? (Model.TimeEnded.Value -Model.TimeStarted).ToString() : "-";
+}
+
+<h4>
+    Details
+    <br />
+    <small class="text-muted">You spent <b>@Model.TimeSpent</b> hours on this task</small>
+    <a href="@Url.Action("Update", routeValues: new { @id = Model.Id })"><span class="badge badge-primary badge-pill">Update</span></a>
+</h4>
+
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Job Category :</b></text>
+        @Model.JobCategory.Name
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Description :</b></text>
+        @Model.Description
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Time started :</b></text>
+        @Model.TimeStarted.ToString()
+    </li>
+
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <text><b>Time ended :</b></text>
+        @{  var timeEnded = Model.TimeEnded.HasValue == true ? Model.TimeEnded.Value.ToString() : "-";}@timeEnded
+    </li>
+</ul>
+<button type="button" class="btn btn-primary btn-lg btn-block">See statistics</button>
