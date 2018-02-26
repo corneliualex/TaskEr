@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TaskEr.CustomAttributes;
 using TaskEr.Models;
 
 namespace TaskEr.Controllers
@@ -12,10 +14,14 @@ namespace TaskEr.Controllers
     public class JobCategoriesController : Controller
     {
         ApplicationDbContext _context = new ApplicationDbContext();
+        private UserManager<ApplicationUser> UserManager { get; set; }
 
-        //[Authorize(Roles = "Administrator,Developer,Moderator,Worker")]
+        public JobCategoriesController()
+        {
+            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+        }
+
         #region GetRequests
-
         public ActionResult Index()
         {
             var jobCategories = _context.JobCategories.ToList();
@@ -25,7 +31,6 @@ namespace TaskEr.Controllers
                 return View();
             }
             return View(jobCategories);
-
         }
 
         public ActionResult Create()
@@ -54,11 +59,12 @@ namespace TaskEr.Controllers
 
             if (jobCategory == null)
                 return HttpNotFound();
-            return View("UpdateForm",jobCategory);
+            return View("UpdateForm", jobCategory);
         }
 
+        [JobCategoriesAuthorize(Roles ="Developer,Administrator,Moderator")]
         public ActionResult Delete(int? id)
-        {
+        { 
             var jobCategory = _context.JobCategories.SingleOrDefault(j => j.Id == id);
 
             if (jobCategory == null)
@@ -93,7 +99,14 @@ namespace TaskEr.Controllers
             jobInDb.ModifiedBy = User.Identity.GetUserName();
 
             _context.SaveChanges();
-            return RedirectToAction("Index","JobCategories");
+            return RedirectToAction("Index", "JobCategories");
+        }
+        #endregion
+
+        #region Helpers
+        public ApplicationUser GetCurrentUser()
+        {
+            return UserManager.FindById(User.Identity.GetUserId());
         }
         #endregion
     }

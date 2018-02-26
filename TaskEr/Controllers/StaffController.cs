@@ -6,9 +6,10 @@ using System.Web.Mvc;
 
 namespace TaskEr.Controllers
 {
-    public class AdminDashboardController : Controller
+    [Authorize(Roles ="Developer,Administrator,Moderator")]
+    public class StaffController : Controller
     {
-        // GET: AdminDashboard
+        // GET: Staff
         public ActionResult Index()
         {
             return View();

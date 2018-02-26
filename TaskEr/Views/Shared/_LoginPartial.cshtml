@@ -5,7 +5,14 @@
     {
         @Html.AntiForgeryToken()
 
+
         <ul class="nav navbar-nav navbar-right">
+            @if (User.IsInRole("Developer") | User.IsInRole("Administrator") | User.IsInRole("Moderator"))
+            {
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Index","Staff")">Staff Dashboard</a>
+            </li>
+            }
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Index","JobCategories")">Job Categories</a>
             </li>
@@ -17,6 +24,8 @@
             </li>
             <li class="nav-item"><a class="nav-link" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
+
+
     }
 }
 else
