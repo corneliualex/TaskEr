@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TaskEr.ApplicationHelpers;
 using TaskEr.CustomAttributes;
 using TaskEr.Models;
 
@@ -13,12 +14,13 @@ namespace TaskEr.Controllers
     [Authorize]
     public class JobCategoriesController : Controller
     {
-        ApplicationDbContext _context = new ApplicationDbContext();
-        private UserManager<ApplicationUser> UserManager { get; set; }
+        private ApplicationDbContext _context;
+        private UserHelpers<ApplicationUser> _userHelper;
 
         public JobCategoriesController()
         {
-            UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            _userHelper = new UserHelpers<ApplicationUser>(System.Web.HttpContext.Current);
+            _context = new ApplicationDbContext();
         }
 
         #region GetRequests
@@ -62,7 +64,7 @@ namespace TaskEr.Controllers
             return View("UpdateForm", jobCategory);
         }
 
-        [JobCategoriesAuthorize(Roles ="Developer,Administrator,Moderator")]
+        //[JobCategoriesAuthorize(Roles ="Developer,Administrator,Moderator")]
         public ActionResult Delete(int? id)
         { 
             var jobCategory = _context.JobCategories.SingleOrDefault(j => j.Id == id);
@@ -100,13 +102,6 @@ namespace TaskEr.Controllers
 
             _context.SaveChanges();
             return RedirectToAction("Index", "JobCategories");
-        }
-        #endregion
-
-        #region Helpers
-        public ApplicationUser GetCurrentUser()
-        {
-            return UserManager.FindById(User.Identity.GetUserId());
         }
         #endregion
     }
