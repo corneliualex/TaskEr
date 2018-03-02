@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using TaskEr.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace TaskEr.Controllers
 {
@@ -17,6 +18,7 @@ namespace TaskEr.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _context = new ApplicationDbContext();
 
         public AccountController()
         {
@@ -136,7 +138,7 @@ namespace TaskEr.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator,Developer,Moderator")]
         public ActionResult Register()
         {
             return View();
@@ -145,7 +147,7 @@ namespace TaskEr.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
-        [AllowAnonymous]
+        [Authorize(Roles = "Administrator,Developer,Moderator")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -154,6 +156,12 @@ namespace TaskEr.Controllers
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, isRegularUser = true };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Staff");
+                }
+                /*
+                 * Don't need to redirect to current created user
+                 * if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
@@ -164,7 +172,7 @@ namespace TaskEr.Controllers
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     return RedirectToAction("Index", "Home");
-                }
+                }*/
                 AddErrors(result);
             }
 

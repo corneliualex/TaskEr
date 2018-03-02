@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace TaskEr.Models
@@ -79,8 +80,18 @@ namespace TaskEr.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public UserRoleViewModel UserRolesViewModel { get; set; }
+        
     }
 
+    public class UserRoleViewModel
+    {
+        public ApplicationUser User { get; set; }
+        public IEnumerable<IdentityRole> Roles { get; set; }
+        public IdentityUserRole UserRole { get; set; }
+        
+    }
     public class ResetPasswordViewModel
     {
         [Required]

@@ -14,24 +14,21 @@ namespace TaskEr.Controllers
     [Authorize]
     public class JobCategoriesController : Controller
     {
+        #region fields and constructors
+        private ILoggedInUser<ApplicationUser, IdentityUserRole> _loggedInUser;
         private ApplicationDbContext _context;
-        private UserHelpers<ApplicationUser> _userHelper;
 
         public JobCategoriesController()
         {
-            _userHelper = new UserHelpers<ApplicationUser>(System.Web.HttpContext.Current);
+            _loggedInUser = new LoggedInUser(System.Web.HttpContext.Current);
             _context = new ApplicationDbContext();
         }
+        #endregion
 
         #region GetRequests
         public ActionResult Index()
         {
             var jobCategories = _context.JobCategories.ToList();
-            if (jobCategories.Count == 0)
-            {
-                ModelState.AddModelError("", JobCategoriesErrors.EMPTYDB);
-                return View();
-            }
             return View(jobCategories);
         }
 
@@ -64,9 +61,9 @@ namespace TaskEr.Controllers
             return View("UpdateForm", jobCategory);
         }
 
-        //[JobCategoriesAuthorize(Roles ="Developer,Administrator,Moderator")]
+        [JobCategoriesAuthorize(Roles ="Developer,Administrator,Moderator")]
         public ActionResult Delete(int? id)
-        { 
+        {
             var jobCategory = _context.JobCategories.SingleOrDefault(j => j.Id == id);
 
             if (jobCategory == null)
@@ -104,10 +101,5 @@ namespace TaskEr.Controllers
             return RedirectToAction("Index", "JobCategories");
         }
         #endregion
-    }
-
-    public sealed class JobCategoriesErrors
-    {
-        public static readonly string EMPTYDB = "0 records found.";
     }
 }
