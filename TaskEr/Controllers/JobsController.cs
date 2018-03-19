@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using TaskEr.Models;
 using System.Data.Entity;
 using TaskEr.ViewModels;
+using TaskEr.ApplicationHelpers.LoggedInUserHelper;
 
 namespace TaskEr.Controllers
 {
@@ -15,14 +16,43 @@ namespace TaskEr.Controllers
     public class JobsController : Controller
     {
         private ApplicationDbContext _context = new ApplicationDbContext();
+        private ILoggedInUser<ApplicationUser> _loggedInUser;
+
+        private readonly ApplicationUser currentUser;
+        private readonly string currentUserId;
+
+        public JobsController()
+        {
+            _loggedInUser = new LoggedInUser(System.Web.HttpContext.Current);
+        }
 
         #region GetRequests
-        public ActionResult Index()
+        public ActionResult Index(string date)
         {
-            var today = DateTime.Now.ToShortDateString();
-            var myJobs = _context.Jobs.Include(user => user.ApplicationUser).Include(jobCat => jobCat.JobCategory).ToList().Where(j => today.Equals(SetDate(j.AddedDateTime)));
            
-            return View(myJobs);
+            var jobsByUser = _context.Jobs
+                .Include(j => j.JobCategory)
+                .Where(j => j.ApplicationUserId.Equals(currentUserId))
+                .ToList();
+
+            if (!String.IsNullOrEmpty(date))
+            {
+                var jobsByUserAndDate = new List<Job>();
+                foreach (var item in jobsByUser)
+                {
+                    if (date.Equals(item.AddedDateTime.ToShortDateString()))
+                    {
+                        jobsByUserAndDate.Add(item);
+                    }
+                }
+                return View(jobsByUserAndDate);
+            }else
+            {
+                return View(jobsByUser);
+            }
+            
+           
+           
         }
 
         public ActionResult Create()

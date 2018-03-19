@@ -166,7 +166,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationHelpers\LoggedInUser.cs" />
+    <Compile Include="ApplicationHelpers\LoggedInUserHelper\ILoggedInUser.cs" />
+    <Compile Include="ApplicationHelpers\LoggedInUserHelper\ILoggedInUserRoles.cs" />
+    <Compile Include="ApplicationHelpers\LoggedInUserHelper\LoggedInUser.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />

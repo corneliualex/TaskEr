@@ -8,37 +8,44 @@ using System.Collections.Generic;
 using System.Linq;
 using TaskEr.ApplicationHelpers;
 
-namespace TaskEr.ApplicationHelpers
+namespace TaskEr.ApplicationHelpers.LoggedInUserHelper
 {
     [Authorize]
-    public class LoggedInUser : Controller, ILoggedInUser<ApplicationUser,IdentityUserRole>
+    public class LoggedInUser : Controller, ILoggedInUser<ApplicationUser>, ILoggedInUserRoles<IdentityUserRole>
     {
         #region fields & constructors
         private UserManager<ApplicationUser> _userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
         private static readonly ApplicationDbContext _context = new ApplicationDbContext();
+        private readonly ApplicationUser _currentUser = new ApplicationUser();
         private readonly HttpContext _httpContext;
-       
+
         public LoggedInUser(HttpContext httpContext)
         {
             _httpContext = httpContext;
+            _currentUser = _userManager.FindById(GetUserId());
         }
         #endregion
 
         #region ILoggedInUser interface 
-       
+
         public string GetUserId()
         {
             return _httpContext.User.Identity.GetUserId();
         }
 
+        public string GetUsername()
+        {
+            return _currentUser.UserName;
+        }
+
         public ApplicationUser GetUser()
         {
-            return _userManager.FindById(GetUserId());
+            return _currentUser;
         }
 
         public ICollection<IdentityUserRole> GetUserRoles()
         {
-            return GetUser().Roles;
+            return _currentUser.Roles;
         }
 
         public IEnumerable<string> GetUserRolesByName()
@@ -52,19 +59,12 @@ namespace TaskEr.ApplicationHelpers
             return rolesList;
         }
 
+       
+
         #endregion
     }
 
-    internal interface ILoggedInUser<TUser,TUserRole> 
-        where TUser : ApplicationUser
-        where TUserRole : IdentityUserRole
-    {
-        string GetUserId();
+    
 
-        TUser GetUser();
-
-        ICollection<TUserRole> GetUserRoles();
-
-        IEnumerable<string> GetUserRolesByName();
-    }
+   
 }

@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using TaskEr.ApplicationHelpers;
+using TaskEr.ApplicationHelpers.LoggedInUserHelper;
 using TaskEr.CustomAttributes;
 using TaskEr.Models;
 
@@ -15,7 +13,7 @@ namespace TaskEr.Controllers
     public class JobCategoriesController : Controller
     {
         #region fields and constructors
-        private ILoggedInUser<ApplicationUser, IdentityUserRole> _loggedInUser;
+        private ILoggedInUser<ApplicationUser> _loggedInUser;
         private ApplicationDbContext _context;
 
         public JobCategoriesController()

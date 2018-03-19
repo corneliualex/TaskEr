@@ -2,8 +2,8 @@
 @{
     ViewBag.Title = "Index";
     var index = 0;
-    var hoursWorkedToday= Model.Where(j => j.AddedDateTime.ToShortDateString().Equals(DateTime.Now.ToShortDateString())).Sum(j => j.TimeSpent.HasValue == true ? j.TimeSpent.Value.TotalHours : 0.0d);
-    
+    var hoursWorkedToday = Model.Where(j => j.AddedDateTime.ToShortDateString().Equals(DateTime.Now.ToShortDateString())).Sum(j => j.TimeSpent.HasValue == true ? j.TimeSpent.Value.TotalHours : 0.0d);
+
 }
 
 <h4><small class="text-muted">Today - @DateTime.Now.ToShortDateString() you have worked <b>@hoursWorkedToday</b> hours</small></h4>
@@ -67,3 +67,12 @@
 </table>
 <a type="button" class="btn btn-primary btn-lg btn-block" href="@Url.Action("Create")">What have you done today ?</a>
 <a type="button" class="btn btn-primary btn-lg btn-block" href="#">See statistics</a>
+
+
+@using (Html.BeginForm("Index", "Jobs", FormMethod.Get))
+{
+    <div class="form-group">@Html.TextBox("date", null, new { @class = "form-control" })</div>
+
+    <button type="submit" class="btn btn-primary">Search</button>
+}
+
